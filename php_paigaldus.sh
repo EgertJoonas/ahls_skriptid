@@ -1,21 +1,20 @@
+#php paigaldusskript
 
-#phpmyadmin paigaldusskript
-
-#leiame muutuja
-php=$(dpkg-query -W -f='$(Status)' phpmyadmin 2>/dev/null | grep -c 'ok installed')
-#kui php ei ole paigaldatud
+#leiame muutuja skripti jaoks
+php=$(dpkg-query -W -f='$(Status)' php7.0 2>/dev/null | grep -c 'ok installed')
+#kui php ei ole installitud:
 if [ $php -eq 0 ]; then
-      #anname kasutjale teada et paigaldus hakkab
-      echo "paigaldan phpmyadmini ja lisad"
-      #installime phpmyadmini
-      apt install phpmyadmin
-      #anname kasutajale teade et paigaldus on lõppenud
-      echo "phpmyadmin on paigaldatud"
-#kui php on juba paigaldatud
+        #anname kasutajale teada et paigaldus hakkab pihta
+        echo "Paigaldame php ja lisad"
+        #installime php ja lisad
+        apt install php7.0 libapache2-mod-php7.0 php7.0-mysql
+        #anname kasutajale teada et paigaldus on lõppenud
+        echo "php on paigaldatud"
+#kui php on installitud:
 elif [ $php -eq 1 ]; then
-      #anname kasutajale teade et teenus on juba paigaldatud
-      echo "phpmyadmin on juba paigaldatud"
-      #paneme käima
-      phpmyadmin
+        #anname kasutajale teada et php on juba paigaldatud ja mis versioon
+        echo "php on juba paigaldatud"
+        which php
+
 fi
 #skripti lõpp
